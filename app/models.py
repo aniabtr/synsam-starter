@@ -29,6 +29,12 @@ class User(Base):
         primary_key=True,
         default=uuid.uuid4,
     )
+    
+    display_name: Mapped[Optional[str]] = mapped_column(
+        String(255),
+        nullable=True,
+    )
+    
     email: Mapped[str] = mapped_column(
         String(255),
         unique=True,
