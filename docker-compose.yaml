@@ -1,0 +1,20 @@
+services: 
+  db: 
+    image: postgres:17
+    ports:
+      - "5432:5432"
+    env_file: .env.development
+    volumes:
+      - data:/var/lib/postgresql/data
+  app:
+    build: .  
+    depends_on:
+      - db
+    env_file: .env.development
+    ports:
+      - "8000:8000"
+    command: >
+      poetry run uvicorn app.main:app --host 0.0.0.0 --port 8000
+volumes: 
+  data:
+
